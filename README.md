@@ -1,6 +1,6 @@
 # ----- vllm (> v0.7.4) 安裝 ----- #
-git clone https://github.com/vllm-project/vllm.git
-cd vllm
+git clone https://github.com/vllm-project/vllm.git \n
+cd vllm \n
 git fetch origin main
 git reset -hard origin/main
 git pull --rebase
