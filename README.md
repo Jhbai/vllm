@@ -15,6 +15,7 @@ lsof -i :8000
 kill -9 123
 
 python -m vllm.entrypoints.openai.api_server --model /model/gemma/gemma3_4b --host 0.0.0.0 --port 8000
+(vllm serve /model/gemma/gemma3_4b --model-impl transformers)
 
 # ----- 用docker image直接執行 ----- #
 docker run --rm --gpus all -p 8000:8000 -v "D:\LLM:/model" --name vllm-nemotron-server vllm/vllm-openai:v0.8.1 --model /model/Nemotron-Research-Reasoning-Qwen-1.5B/ --max-model-len 8192 --host 0.0.0.0
