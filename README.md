@@ -19,3 +19,16 @@ python -m vllm.entrypoints.openai.api_server --model /model/gemma/gemma3_4b --ho
 
 # ----- 用docker image直接執行 ----- #
 docker run --rm --gpus all -p 8000:8000 -v "D:\LLM:/model" --name vllm-nemotron-server vllm/vllm-openai:v0.8.1 --model /model/Nemotron-Research-Reasoning-Qwen-1.5B/ --max-model-len 8192 --host 0.0.0.0
+
+# ----- 推論 ----- #
+import requests
+Json = {
+    "model": "/model/Nemotron-Research-Reasoning-Qwen-1.5B/",
+    "messages": [
+      {"role": "system", "content": "Yor are a helpful AI assistant."},
+      {"role": "user", "content": "Please introduce Taiwan semiconductor manufacturing company"}
+    ],
+    "temperature": 0.7,
+    "max_tokens": 512
+}
+r = requests.post("http://localhost:8000/v1/chat/completions", json = Json, headers={"Content-Type": "application/json"})
